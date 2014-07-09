@@ -22,13 +22,14 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ervandew/supertab'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'tjennings/git-grep-vim'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 Plugin 'tmhedberg/matchit'
+Bundle 'Lokaltog/vim-easymotion'
 
 filetype plugin indent on     " required
 " To ignore plugin indent changes, instead use:
@@ -54,6 +55,7 @@ set hlsearch
 
 " show line numbers
 set number
+set relativenumber
 
 " tab = 2 spaces
 set tabstop=2
@@ -68,6 +70,8 @@ set so=7
 
 " ignore VCS files
 set wildignore+=.git\*,.hg\*,.svn\*
+set wildignore+=*/tmp/*
+set wildignore+=*/node_modules/*
 
 " show current position
 set ruler
@@ -113,7 +117,7 @@ endtry
 
 set background=dark
 
-let g:ctrlp_clear_cache_on_exit=0
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 
 " Mappings
 
@@ -121,4 +125,35 @@ let g:ctrlp_clear_cache_on_exit=0
 " Open Ack and put the cursor in the right position
 map <leader>g :GitGrep 
 
+" Easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-s)
+
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap <leader>s2 <Plug>(easymotion-s2)
+
+nmap <leader>sf <Plug>(easymotion-f)
+nmap <leader>sF <Plug>(easymotion-F)
+nmap <leader>st <Plug>(easymotion-t)
+nmap <leader>sT <Plug>(easymotion-T)
+nmap <leader>sw <Plug>(easymotion-w)
+nmap <leader>sW <Plug>(easymotion-W)
+nmap <leader>sb <Plug>(easymotion-b)
+nmap <leader>sB <Plug>(easymotion-B)
+nmap <leader>se <Plug>(easymotion-e)
+nmap <leader>sE <Plug>(easymotion-E)
+nmap <leader>sge <Plug>(easymotion-ge)
+nmap <leader>sgE <Plug>(easymotion-gE)
+nmap <leader>sj <Plug>(easymotion-j)
+nmap <leader>sk <Plug>(easymotion-k)
+nmap <leader>sn <Plug>(easymotion-n)
+nmap <leader>sN <Plug>(easymotion-N)
+nmap <leader>ss    <Plug>(easymotion-s)
+
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
