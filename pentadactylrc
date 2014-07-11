@@ -1,0 +1,16 @@
+set editor=vi
+
+set incfind
+
+set hlfind
+
+set findcase=smart
+
+map -b j 8j
+map -b k 8k
+map -b h 8h
+map -b l 8l
+set hintkeys=asdflkj
+hi -a Hint font-size: 9pt !important;
+set strictfocus=google.com:laissez-faire,'chrome:*':laissez-faire,*:despotic
+
